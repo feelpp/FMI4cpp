@@ -1,6 +1,6 @@
 ### BUILDING
 
-For building FMI4cpp, you are can use either `conan` or `apt-get` for getting the required dependencies.
+For building FMI4cpp, you can use either `conan` or `apt-get` for getting the required dependencies.
 
 ##### conan
 
