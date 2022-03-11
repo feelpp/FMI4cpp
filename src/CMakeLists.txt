@@ -113,6 +113,8 @@ target_link_libraries(fmi4cpp
 
 if(WIN32)
     target_link_libraries(fmi4cpp PRIVATE "Bcrypt")
+elseif(APPLE) # APPLE tested before UNIX because UNIX==true on APPLE
+    target_link_libraries(fmi4cpp PRIVATE dl)
 elseif(UNIX)
     target_link_libraries(fmi4cpp PRIVATE stdc++fs dl)
 endif()
