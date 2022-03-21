@@ -113,10 +113,21 @@ target_link_libraries(fmi4cpp
 
 if(WIN32)
     target_link_libraries(fmi4cpp PRIVATE "Bcrypt")
-elseif(APPLE) # APPLE tested before UNIX because UNIX==true on APPLE
-    target_link_libraries(fmi4cpp PRIVATE dl)
 elseif(UNIX)
-    target_link_libraries(fmi4cpp PRIVATE stdc++fs dl)
+    target_link_libraries(fmi4cpp PRIVATE dl)
+endif()
+
+# Additional libraries for filesystem support:
+# link stdc++fs for GNU before 9.1 and c++fs for LLVM before 9.0
+# c.f. https://en.cppreference.com/w/cpp/filesystem
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "9.1")
+        target_link_libraries(fmi4cpp PRIVATE stdc++fs)
+    endif()
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" )
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "9.0")
+        target_link_libraries(fmi4cpp PRIVATE c++fs)
+    endif()
 endif()
 
 
