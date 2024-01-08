@@ -101,11 +101,12 @@ target_include_directories(fmi4cpp
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
+	${PUGIXML_INCLUDE_DIRS}
 )
 
 target_link_libraries(fmi4cpp
     PRIVATE
-        pugixml
+        ${PUGIXML_LIBRARIES}
         libzip::libzip
 )
 
