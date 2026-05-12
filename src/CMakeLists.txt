@@ -113,7 +113,10 @@ target_link_libraries(fmi4cpp
 if(WIN32)
     target_link_libraries(fmi4cpp PRIVATE "Bcrypt")
 elseif(UNIX)
-    target_link_libraries(fmi4cpp PRIVATE stdc++fs dl)
+    target_link_libraries(fmi4cpp PRIVATE ${CMAKE_DL_LIBS})
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_link_libraries(fmi4cpp PRIVATE stdc++fs)
+    endif()
 endif()
 
 
